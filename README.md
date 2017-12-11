@@ -28,7 +28,9 @@
    notifyIP.py YouEmailAddress YouPasswordForYourEmailAccount YouSMTPServer YouSMTPPort
 
 如果需要在服务器设备上每次启动时都自动运行notifyIP.py，则可以参考stackoverflow站点上这个session的第二个方案。
+
 https://stackoverflow.com/questions/24518522/run-python-script-at-startup-in-ubuntu
+
 我总结为如下步骤：
 
 1. sudo crontab -e
