@@ -13,6 +13,31 @@
 3. 把上一步骤获得的IP地址，和自己存储的老地址相比较，如果已经发生了变化，则加密或明文地通过SMTP服务，传送到系统设置的email地址里面。
 4. 每次系统重新启动的时候，自动执行第一到第三步。这样做可以克服上述的dynamic dns的第二个缺点：重新启动后，更新IP地址过慢。
 
+使用方法：
+1. 准备工作：
+
+   a. 一个email帐号地址
+
+   b. 上面那个email帐号地址对应的SMTP密码，多数情况下，等同于email帐号的Pop3密码
+
+   c. email帐号对应的的SMTP的服务器IP地址或者域名，比如mail.163.com对应的SMTP服务器是：smtp.163.com
+
+   d. email帐号对应的的SMTP的服务端口，多数情况下都是25
+
+2. 执行如下命令：
+   notifyIP.py YouEmailAddress YouPasswordForYourEmailAccount YouSMTPServer YouSMTPPort
+
+如果需要在服务器设备上每次启动时都自动运行notifyIP.py，则可以参考stackoverflow站点上这个session的第二个方案。
+https://stackoverflow.com/questions/24518522/run-python-script-at-startup-in-ubuntu
+我总结为如下步骤：
+
+1. sudo crontab -e
+
+2. 在最后，增加一行如下命令：
+
+   @reboot python /your_path_to_notifyIP/notifyIP.py YouEmailAddress YouPasswordForYourEmailAccount YouSMTPServer YouSMTPPort &
+
+
 2017.12.11
 
 Clock ZHONG
