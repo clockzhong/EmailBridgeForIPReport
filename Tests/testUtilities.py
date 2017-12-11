@@ -34,6 +34,11 @@ class testUtilities(unittest.TestCase):
 
         Utilities.sendEmail(emailAddr, password, mesgContent)
 
+    def testNotifyIP(self):
+        emailAddr = "youEmail"
+        password  = "youPassword"
+        Utilities.notifyIP(emailAddr, password)
+
 
 if __name__ == '__main__':
 	unittest.main()

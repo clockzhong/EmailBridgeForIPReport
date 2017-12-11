@@ -3,6 +3,7 @@
 import urllib2
 from email.mime.text import MIMEText
 import smtplib
+import time
 
 EmailAddr="YouEmailAddress"
 SMTPPassword="YouPasswordForYourEmailAccount"
@@ -10,15 +11,15 @@ SMTPPassword="YouPasswordForYourEmailAccount"
 SMTPServer = "smtp.163.com"
 SMTPPort   =  25
 
+CurrentIP = ''
 
 HTTP_TIMEOUT=38
+
 AgentList=['Mozilla/5.0 (X11; U; Linux i686) Gecko/20071127 Firefox/2.0.0.11',
         "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0"]
 
 #it seems 'http://www.iplocation.net/' couldn't work
 IPReportWebList=['http://www.infosniper.net/', 'http://2017.ip138.com/ic.asp','http://www.iplocation.net/']
-
-
 
 
 def getURL(url):
@@ -30,12 +31,15 @@ def getURL(url):
         text = openerConnection.read()
     except Exception as e:
         print e
-        return text
+        return ""
     return text
 
 def getIPFromIP138():
     url = IPReportWebList[1]
     htmlCont= getURL(url)
+    while htmlCont == "":
+        time.sleep(3)
+        htmlCont = getURL(url)
     startChar = '['
     endChar   = ']'
     startIndex = htmlCont.index(startChar)+len(startChar)
@@ -54,5 +58,7 @@ def sendEmail(emailAddr, password, mesgContent, smtpServer=SMTPServer, smtpPort=
     s.login(me, password)
     s.sendmail(me, [you], msg.as_string())
 
-
-
+def notifyIP(emailAddr, password)
+    newIP = getIPFromIP138()
+    if newIP != CurrentIP:
+        sendEmail(emailAddr, password, newIP)
