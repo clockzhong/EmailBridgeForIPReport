@@ -25,6 +25,11 @@ class testUtilities(unittest.TestCase):
 
     def testGetIP(self):
         ipAddr=Utilities.getIPFromIP138()
-        print ipAddr
+        print "Your IP is:", ipAddr
+
+    def testSendEmail(self):
+#        emailAddr , password, smtpServer, smtpPort, mesgContent
+        pass
+
 if __name__ == '__main__':
 	unittest.main()
