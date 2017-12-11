@@ -41,6 +41,6 @@ https://stackoverflow.com/questions/24518522/run-python-script-at-startup-in-ubu
 
 上述步骤在Ubuntu16.04 LTS环境中验证工作正常。
 
-2017.12.11
+2017.12.12
 
-Clock ZHONG
+钟钟
