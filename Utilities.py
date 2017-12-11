@@ -63,7 +63,7 @@ def notifyIP(emailAddr, password, smtpServer=SMTPServer, smtpPort=SMTPPort):
     global CurrentIP
     newIP = getIPFromIP138()
     if newIP != CurrentIP:
-        sendEmail(emailAddr, password, newIP, , smtpServer, smtpPort)
+        sendEmail(emailAddr, password, newIP, smtpServer, smtpPort)
         CurrentIP = newIP
     else:
         print "CurrentIP is not changed"
