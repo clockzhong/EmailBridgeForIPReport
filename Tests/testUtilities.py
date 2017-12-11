@@ -37,7 +37,12 @@ class testUtilities(unittest.TestCase):
     def testNotifyIP(self):
         emailAddr = "youEmail"
         password  = "youPassword"
+
         Utilities.notifyIP(emailAddr, password)
+        Utilities.notifyIP(emailAddr, password)
+        Utilities.notifyIP(emailAddr, password)
+        Utilities.notifyIP(emailAddr, password)
+        #you should only get one email, because you IP is not changed
 
 
 if __name__ == '__main__':

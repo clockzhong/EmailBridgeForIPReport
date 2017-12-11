@@ -39,6 +39,7 @@ def getIPFromIP138():
     htmlCont= getURL(url)
     while htmlCont == "":
         time.sleep(3)
+        print "failed to get IP, try again"
         htmlCont = getURL(url)
     startChar = '['
     endChar   = ']'
@@ -58,7 +59,12 @@ def sendEmail(emailAddr, password, mesgContent, smtpServer=SMTPServer, smtpPort=
     s.login(me, password)
     s.sendmail(me, [you], msg.as_string())
 
-def notifyIP(emailAddr, password)
+def notifyIP(emailAddr, password):
+    global CurrentIP
     newIP = getIPFromIP138()
     if newIP != CurrentIP:
         sendEmail(emailAddr, password, newIP)
+        CurrentIP = newIP
+    else:
+        pass
+        print "CurrentIP is not changed"
