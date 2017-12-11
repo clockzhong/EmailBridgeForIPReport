@@ -2,6 +2,7 @@
 
 import urllib2
 from email.mime.text import MIMEText
+import smtplib
 
 EmailAddr="YouEmailAddress"
 SMTPPassword="YouPasswordForYourEmailAccount"
@@ -42,7 +43,7 @@ def getIPFromIP138():
     return htmlCont[startIndex:endIndex]
 
 
-def sendEmail(emailAddr, password, smtpServer, smtpPort, mesgContent):
+def sendEmail(emailAddr, password, mesgContent, smtpServer=SMTPServer, smtpPort=SMTPPort):
     you = emailAddr
     me = emailAddr
     msg = MIMEText(mesgContent)

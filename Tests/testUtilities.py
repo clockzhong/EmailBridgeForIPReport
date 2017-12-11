@@ -28,8 +28,12 @@ class testUtilities(unittest.TestCase):
         print "Your IP is:", ipAddr
 
     def testSendEmail(self):
-#        emailAddr , password, smtpServer, smtpPort, mesgContent
-        pass
+        emailAddr = "youEmail"
+        password  = "youPassword"
+        mesgContent = "test Content"
+
+        Utilities.sendEmail(emailAddr, password, mesgContent)
+
 
 if __name__ == '__main__':
 	unittest.main()
