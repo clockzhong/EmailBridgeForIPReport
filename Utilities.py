@@ -59,12 +59,11 @@ def sendEmail(emailAddr, password, mesgContent, smtpServer=SMTPServer, smtpPort=
     s.login(me, password)
     s.sendmail(me, [you], msg.as_string())
 
-def notifyIP(emailAddr, password):
+def notifyIP(emailAddr, password, smtpServer=SMTPServer, smtpPort=SMTPPort):
     global CurrentIP
     newIP = getIPFromIP138()
     if newIP != CurrentIP:
-        sendEmail(emailAddr, password, newIP)
+        sendEmail(emailAddr, password, newIP, , smtpServer, smtpPort)
         CurrentIP = newIP
     else:
-        pass
         print "CurrentIP is not changed"
