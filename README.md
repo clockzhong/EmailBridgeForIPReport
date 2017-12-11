@@ -8,7 +8,7 @@
     b. dynamic dns的更新频率并不能任意设置，很多设备的配置只允许最快在十分钟内才更新新的IP给DNS记录，而最终全互联网有效，则需要等待超过15分钟。太慢。
 
 系统设计实现:
-1. 系统每过一段时间，访问互联网上的某些IP报告网站，https://www.iplocation.net/, http://www.infosniper.net/, http://ip138.com/
+1. 系统每过一段时间，访问互联网上的某些IP报告网站，https://www.iplocation.net/, http://www.infosniper.net/, http://ip138.com/;
 2. 解析上一步获得的网站html内容,获得其回报的IP地址;
 3. 把上一步骤获得的IP地址，和自己存储的老地址相比较，如果已经发生了变化，则加密或明文地通过SMTP服务，传送到系统设置的email地址里面。
 4. 每次系统重新启动的时候，自动执行第一到第三步。这样做可以克服上述的dynamic dns的第二个缺点：重新启动后，更新IP地址过慢。
