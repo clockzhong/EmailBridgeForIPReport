@@ -31,7 +31,7 @@
 
 https://stackoverflow.com/questions/24518522/run-python-script-at-startup-in-ubuntu
 
-我总结为如下步骤：
+我总结为如下两步：
 
 1. sudo crontab -e
 
