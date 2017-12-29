@@ -48,11 +48,11 @@ def getIPFromIP138():
     return htmlCont[startIndex:endIndex]
 
 
-def sendEmail(emailAddr, password, mesgContent, smtpServer=SMTPServer, smtpPort=SMTPPort):
+def sendEmail(emailAddr, password, mesgContent, smtpServer=SMTPServer, smtpPort=SMTPPort, extraComment=""):
     you = emailAddr
     me = emailAddr
     msg = MIMEText(mesgContent)
-    msg['Subject'] = "Your IP Address"
+    msg['Subject'] = "Your IP Address"+" "+ extraComment
     msg['From'] = me
     msg['To'] = you
     s = smtplib.SMTP(smtpServer, smtpPort)
