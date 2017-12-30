@@ -36,16 +36,26 @@ def getURL(url):
 
 def getIPFromIP138():
     url = IPReportWebList[1]
-    htmlCont= getURL(url)
-    while htmlCont == "":
-        time.sleep(3)
-        print "failed to get IP, try again"
-        htmlCont = getURL(url)
-    startChar = '['
-    endChar   = ']'
-    startIndex = htmlCont.index(startChar)+len(startChar)
-    endIndex   = htmlCont.index(endChar)
-    return htmlCont[startIndex:endIndex]
+    htmlCont = ""
+    while True:
+        while True:
+            try :
+                htmlCont= getURL(url)
+                if htmlCont != "":
+                    #print "got IP:", htmlCont
+                    break
+            except e:
+                print "try again because getting errors:", e
+        startChar = '['
+        endChar   = ']'
+        startIndex = htmlCont.index(startChar)+len(startChar)
+        endIndex   = htmlCont.index(endChar)
+        ipStr= htmlCont[startIndex:endIndex]
+        #if len(ipStr) is 0, done't return, try the above code again
+        if len(ipStr)!=0:
+            return ipStr
+        else:
+            print "try again because geting wrong IP", ipStr
 
 
 def sendEmail(emailAddr, password, mesgContent, smtpServer=SMTPServer, smtpPort=SMTPPort, extraComment=""):
