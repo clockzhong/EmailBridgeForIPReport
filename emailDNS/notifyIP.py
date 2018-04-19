@@ -32,7 +32,7 @@ MaximumPauseTime = 60*15
 hostName = platform.node()
 msg = " from "+hostName
 print msg
-quit()
+#quit()
 
 while True:
     print "check the IP"
