@@ -7,6 +7,7 @@ import smtplib
 import time
 import Utilities
 import random
+import platform
 
 if len(sys.argv)!=3 and len(sys.argv)!=5:
     print "notifyIP.py YouEmailAddress YouPasswordForYourEmailAccount"
@@ -28,9 +29,14 @@ print (emailAddr, password, smtpServer, smtpPort)
 MinimumPauseTime = 50
 MaximumPauseTime = 60*15
 
+hostName = platform.node()
+msg = " from "+hostName
+print msg
+quit()
+
 while True:
     print "check the IP"
-    Utilities.notifyIP(emailAddr, password, smtpServer, smtpPort)
+    Utilities.notifyIP(emailAddr, password, smtpServer, smtpPort, msg)
     pauseTime = random.randint(MinimumPauseTime, MaximumPauseTime)
     print "wait for ",pauseTime, " seconds"
     time.sleep(pauseTime)
