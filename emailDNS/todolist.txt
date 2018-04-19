@@ -1,0 +1,10 @@
+还有如下工作可以做：
+1. 现在只是通过访问http://ip138.com/来获得本机的外部IP地址，还有很多其他的网站提供了这种地址回报的服务。我在code里面已经有了https://www.iplocation.net/, http://www.infosniper.net/，但是由于html内容的解析比ip138的复杂写，就暂时没有做。其实做起来也很简单。以后有时间补上。
+2. 在程序中支持多email帐号。暂时可以通过在crontab里面多设置几行
+   @reboot python /your_path_to_notifyIP/notifyIP.py YouEmailAddress YouPasswordForYourEmailAccount YouSMTPServer YouSMTPPort &
+   来达到同样的目的，只要传递进去的帐号参数不同即可。
+3. 现在只测试了mail.163.com的SMTP服务，对于比如gmail, yahoo, sohu的SMTP并没有进行测试，应该问题不大，但是需要在code中实现测试。
+
+2017.12.12
+
+钟钟
