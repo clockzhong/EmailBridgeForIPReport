@@ -41,6 +41,11 @@ https://stackoverflow.com/questions/24518522/run-python-script-at-startup-in-ubu
 
 上述步骤在Ubuntu16.04 LTS环境中验证工作正常。
 
-2017.12.12
+现在已经可以通过pip安装该项目了，该项目名称为emailDNS，如下命令可以安装：
+sudo pip install emailDNS
+则执行文件会被安装在如下目录：
+/usr/local/lib/python2.7/dist-packages/emailDNS
+
+2018.04.19
 
 钟钟
