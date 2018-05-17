@@ -42,7 +42,7 @@ def getIPFromIP138():
             try :
                 htmlCont= getURL(url)
                 if htmlCont != "":
-                    print "got IP:", htmlCont
+                    #print "got IP:", htmlCont
                     break
             except e:
                 print "try again because getting errors:", e
