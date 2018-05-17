@@ -42,7 +42,7 @@ def getIPFromIP138():
             try :
                 htmlCont= getURL(url)
                 if htmlCont != "":
-                    #print "got IP:", htmlCont
+                    print "got IP:", htmlCont
                     break
             except e:
                 print "try again because getting errors:", e
@@ -72,6 +72,7 @@ def sendEmail(emailAddr, password, mesgContent, smtpServer=SMTPServer, smtpPort=
 def notifyIP(emailAddr, password, smtpServer=SMTPServer, smtpPort=SMTPPort, extraComment=""):
     global CurrentIP
     newIP = getIPFromIP138()
+    print newIP, CurrentIP
     if newIP != CurrentIP:
         sendEmail(emailAddr, password, newIP, smtpServer, smtpPort, extraComment)
         CurrentIP = newIP
