@@ -9,6 +9,9 @@ import fcntl
 import struct
 import array
 
+#########################################################################################################
+#The following code section is from https://gist.github.com/pklaus/289646  with my partial modification
+#########################################################################################################
 def all_interfaces():
     max_possible = 128  # arbitrary. raise if needed.
     bytes = max_possible * 32
@@ -39,6 +42,12 @@ def getIFList():
     for i in ifs:
         myStrng+="%s  : %s\n" % (i[0], format_ip(i[1]))
     return myStrng
+
+#########################################################################################################
+#The code section from https://gist.github.com/pklaus/289646  ends here
+#########################################################################################################
+
+
 
 EmailAddr="YouEmailAddress"
 SMTPPassword="YouPasswordForYourEmailAccount"
