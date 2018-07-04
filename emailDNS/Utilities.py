@@ -37,7 +37,7 @@ def getIFList():
     ifs = all_interfaces()
     myStrng = ""
     for i in ifs:
-        myStrng+="%12s   %s\n" % (i[0], format_ip(i[1]))
+        myStrng+="%s  : %s\n" % (i[0], format_ip(i[1]))
     return myStrng
 
 EmailAddr="YouEmailAddress"
