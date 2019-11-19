@@ -5,7 +5,7 @@ setup(
   version = '1.3',
   description = 'An auto-robot for new IP reporting service into your Email address',
   author = 'Clock ZHONG',
-  author_email = 'zhong.clock@gmail.com',
+  author_email = '',
   url = 'https://github.com/clockzhong/EmailBridgeForIPReport',
   download_url = 'https://github.com/clockzhong/EmailBridgeForIPReport/archive/1.3.tar.gz',
   keywords = ['testing', 'logging', 'example'],
