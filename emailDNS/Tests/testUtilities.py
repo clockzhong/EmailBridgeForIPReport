@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 import os
 import sys
-sys.path.append('..')
+sys.path.insert(0, '..')
 import Utilities
 import unittest
 
@@ -24,6 +24,7 @@ class testUtilities(unittest.TestCase):
         #print htmlCont
 
     def testGetIP(self):
+        #print(dir(Utilities))
         ipAddr=Utilities.getIPFromIP138()
         print "Your IP is:", ipAddr
 

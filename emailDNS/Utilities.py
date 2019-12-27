@@ -19,7 +19,7 @@ AgentList=['Mozilla/5.0 (X11; U; Linux i686) Gecko/20071127 Firefox/2.0.0.11',
         "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0"]
 
 #it seems 'http://www.iplocation.net/' couldn't work
-IPReportWebList=['http://www.infosniper.net/', 'http://2018.ip138.com/ic.asp','http://www.iplocation.net/']
+IPReportWebList=['http://www.infosniper.net/', 'http://2000019.ip138.com/','http://www.iplocation.net/']
 
 
 def getURL(url):
