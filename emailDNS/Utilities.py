@@ -4,6 +4,50 @@ import urllib2
 from email.mime.text import MIMEText
 import smtplib
 import time
+import socket
+import fcntl
+import struct
+import array
+
+#########################################################################################################
+#The following code section is from https://gist.github.com/pklaus/289646  with my partial modification
+#########################################################################################################
+def all_interfaces():
+    max_possible = 128  # arbitrary. raise if needed.
+    bytes = max_possible * 32
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    names = array.array('B', '\0' * bytes)
+    outbytes = struct.unpack('iL', fcntl.ioctl(
+        s.fileno(),
+        0x8912,  # SIOCGIFCONF
+        struct.pack('iL', bytes, names.buffer_info()[0])
+    ))[0]
+    namestr = names.tostring()
+    lst = []
+    for i in range(0, outbytes, 40):
+        name = namestr[i:i+16].split('\0', 1)[0]
+        ip   = namestr[i+20:i+24]
+        lst.append((name, ip))
+    return lst
+
+def format_ip(addr):
+    return str(ord(addr[0])) + '.' + \
+           str(ord(addr[1])) + '.' + \
+           str(ord(addr[2])) + '.' + \
+           str(ord(addr[3]))
+
+def getIFList():
+    ifs = all_interfaces()
+    myStrng = ""
+    for i in ifs:
+        myStrng+="%s  : %s\n" % (i[0], format_ip(i[1]))
+    return myStrng
+
+#########################################################################################################
+#The code section from https://gist.github.com/pklaus/289646  ends here
+#########################################################################################################
+
+
 
 EmailAddr="YouEmailAddress"
 SMTPPassword="YouPasswordForYourEmailAccount"
@@ -12,6 +56,7 @@ SMTPServer = "smtp.163.com"
 SMTPPort   =  25
 
 CurrentIP = ''
+CurrentLocalIPs = ''
 
 HTTP_TIMEOUT=38
 
@@ -71,10 +116,15 @@ def sendEmail(emailAddr, password, mesgContent, smtpServer=SMTPServer, smtpPort=
 
 def notifyIP(emailAddr, password, smtpServer=SMTPServer, smtpPort=SMTPPort, extraComment=""):
     global CurrentIP
+    global CurrentLocalIPs
     newIP = getIPFromIP138()
-    print newIP, CurrentIP
-    if newIP != CurrentIP:
-        sendEmail(emailAddr, password, newIP, smtpServer, smtpPort, extraComment)
+    newLocalIPs = getIFList()
+    print newIP, CurrentIP, newLocalIPs, CurrentLocalIPs
+    if newIP != CurrentIP or newLocalIPs!=CurrentLocalIPs:
+        messageContent = "extra IP:"+newIP+"\n"
+        messageContent+= "local IPs:\n"+newLocalIPs
+        sendEmail(emailAddr, password, messageContent, smtpServer, smtpPort, extraComment)
         CurrentIP = newIP
+        CurrentLocalIPs = newLocalIPs
     else:
-        print "CurrentIP is not changed"
+        print "CurrentIP and CurrentLocalIPs not changed"
