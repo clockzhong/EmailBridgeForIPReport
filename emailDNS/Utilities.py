@@ -125,7 +125,8 @@ def sendEmail(emailAddr, password, mesgContent, smtpServer=SMTPServer, smtpPort=
 def notifyIP(emailAddr, password, smtpServer=SMTPServer, smtpPort=SMTPPort, extraComment=""):
     global CurrentIP
     global CurrentLocalIPs
-    newIP = getIPFromIP138()
+    #newIP = getIPFromIP138()
+    newIP = getIPFromDIG()
     newLocalIPs = getIFList()
     print newIP, CurrentIP, newLocalIPs, CurrentLocalIPs
     if newIP != CurrentIP or newLocalIPs!=CurrentLocalIPs:
