@@ -90,7 +90,7 @@ def getIPFromIP138():
                 if htmlCont != "":
                     #print "got IP:", htmlCont
                     break
-            except e:
+            except Exception as e:
                 print "try again because getting errors:", e
         startChar = '['
         endChar   = ']'
@@ -105,8 +105,14 @@ def getIPFromIP138():
 
 def getIPFromDIG():
     """Use "dig +short myip.opendns.com @resolver1.opendns.com" to get the public address """
-    ipStr = os.popen('dig +short myip.opendns.com @resolver1.opendns.com').readlines(-1)[0].strip()
-    print ipStr
+    lines = os.popen('dig +short myip.opendns.com @resolver1.opendns.com').readlines(-1)
+    #print lines
+    #print len(lines)
+    if len(lines)!=0:
+        ipStr = lines[0].strip()
+    else:
+        ipStr = "10.0.0.1"
+    #print ipStr
     return ipStr
 
 
@@ -118,10 +124,13 @@ def sendEmail(emailAddr, password, mesgContent, smtpServer=SMTPServer, smtpPort=
     msg['Subject'] = "Your IP Address"+" "+ extraComment
     msg['From'] = me
     msg['To'] = you
-    s = smtplib.SMTP(smtpServer, smtpPort)
+    print "connect the smtpServer!"
+    s = smtplib.SMTP(smtpServer, smtpPort, timeout=15)
     print(me, password)
     s.login(me, password)
+    print "sending email!"
     s.sendmail(me, [you], msg.as_string())
+    s.quit()
 
 def notifyIP(emailAddr, password, smtpServer=SMTPServer, smtpPort=SMTPPort, extraComment=""):
     global CurrentIP
@@ -133,7 +142,16 @@ def notifyIP(emailAddr, password, smtpServer=SMTPServer, smtpPort=SMTPPort, extr
     if newIP != CurrentIP or newLocalIPs!=CurrentLocalIPs:
         messageContent = "extra IP:"+newIP+"\n"
         messageContent+= "local IPs:\n"+newLocalIPs
-        sendEmail(emailAddr, password, messageContent, smtpServer, smtpPort, extraComment)
+        print newIP, "!!!!!!!!!!!!!!!!!!!!!!!!"
+        if newIP!="10.0.0.1":
+            while True:
+                try:
+                    sendEmail(emailAddr, password, messageContent, smtpServer, smtpPort, extraComment)
+                    break
+                except Exception as e:
+                    print "try again because getting errors:", e
+
+
         CurrentIP = newIP
         CurrentLocalIPs = newLocalIPs
     else:
