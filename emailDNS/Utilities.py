@@ -119,6 +119,7 @@ def sendEmail(emailAddr, password, mesgContent, smtpServer=SMTPServer, smtpPort=
     msg['From'] = me
     msg['To'] = you
     s = smtplib.SMTP(smtpServer, smtpPort)
+    print(me, password)
     s.login(me, password)
     s.sendmail(me, [you], msg.as_string())
 
