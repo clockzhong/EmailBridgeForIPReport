@@ -8,6 +8,7 @@ import socket
 import fcntl
 import struct
 import array
+import os
 
 #########################################################################################################
 #The following code section is from https://gist.github.com/pklaus/289646  with my partial modification
@@ -101,6 +102,13 @@ def getIPFromIP138():
             return ipStr
         else:
             print "try again because geting wrong IP", ipStr
+
+def getIPFromDIG():
+    """Use "dig +short myip.opendns.com @resolver1.opendns.com" to get the public address """
+    ipStr = os.popen('dig +short myip.opendns.com @resolver1.opendns.com').readlines(-1)[0].strip()
+    print ipStr
+    return ipStr
+
 
 
 def sendEmail(emailAddr, password, mesgContent, smtpServer=SMTPServer, smtpPort=SMTPPort, extraComment=""):
