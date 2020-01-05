@@ -29,6 +29,9 @@ print (emailAddr, password, smtpServer, smtpPort)
 MinimumPauseTime = 50
 MaximumPauseTime = 60*15
 
+MinimumPauseTime = 50/25
+MaximumPauseTime = 60*15/60
+
 hostName = platform.node()
 msg = " from "+hostName
 print msg
