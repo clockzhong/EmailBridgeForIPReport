@@ -53,8 +53,10 @@ def getIFList():
 EmailAddr="YouEmailAddress"
 SMTPPassword="YouPasswordForYourEmailAccount"
 
-SMTPServer = "smtp.163.com"
-SMTPPort   =  25
+SMTPServer_163_com = "smtp.163.com"
+SMTPPort_163_com   =  25
+SMTPServer_outlook_com="smtp.office365.com"
+SMTPPort_outlook_com=587
 
 CurrentIP = ''
 CurrentLocalIPs = ''
@@ -116,8 +118,26 @@ def getIPFromDIG():
     return ipStr
 
 
+smtpDict={
+    "163.com": (SMTPServer_163_com, SMTPPort_163_com),
+    "outlook.com": (SMTPServer_outlook_com, SMTPPort_outlook_com)
+}
 
-def sendEmail(emailAddr, password, mesgContent, smtpServer=SMTPServer, smtpPort=SMTPPort, extraComment=""):
+def getSMTPInfo(domainName):
+    if domainName in smtpDict:
+        return smtpDict[domainName]
+    else:
+        print("Something wrong in your email domain, we use 163.com SMTP server")
+        return smtpDict["163.com"]
+
+def sendEmail(emailAddr, password, mesgContent, extraComment=""):
+    partsArr=emailAddr.split("@")
+    #print(partsArr)
+    account = partsArr[0]
+    domainName=partsArr[1]
+    smtpServer, smtpPort = getSMTPInfo(domainName)
+    #print smtpServer, smtpPort
+    #return
     you = emailAddr
     me = emailAddr
     msg = MIMEText(mesgContent)
@@ -125,14 +145,17 @@ def sendEmail(emailAddr, password, mesgContent, smtpServer=SMTPServer, smtpPort=
     msg['From'] = me
     msg['To'] = you
     print "connect the smtpServer!"
+
     s = smtplib.SMTP(smtpServer, smtpPort, timeout=15)
+    if smtpServer==SMTPServer_outlook_com:
+        s.starttls()
     print(me, password)
     s.login(me, password)
     print "sending email!"
     s.sendmail(me, [you], msg.as_string())
     s.quit()
 
-def notifyIP(emailAddr, password, smtpServer=SMTPServer, smtpPort=SMTPPort, extraComment=""):
+def notifyIP(emailAddr, password, extraComment=""):
     global CurrentIP
     global CurrentLocalIPs
     #newIP = getIPFromIP138()
@@ -146,7 +169,7 @@ def notifyIP(emailAddr, password, smtpServer=SMTPServer, smtpPort=SMTPPort, extr
         if newIP!="10.0.0.1":
             while True:
                 try:
-                    sendEmail(emailAddr, password, messageContent, smtpServer, smtpPort, extraComment)
+                    sendEmail(emailAddr, password, messageContent, extraComment)
                     break
                 except Exception as e:
                     print "try again because getting errors:", e

@@ -15,7 +15,7 @@ if len(sys.argv)!=3 and len(sys.argv)!=5:
     print "notifyIP.py YouEmailAddress YouPasswordForYourEmailAccount YouSMTPServer YouSMTPPort"
     sys.exit(1)
 elif len(sys.argv)==3:
-    smtpServer=Utilities.SMTPServer
+    smtpServer=Utilities.SMTPServer_163.com
     smtpPort=Utilities.SMTPPort
 elif len(sys.argv)==5:
     smtpServer=sys.argv[3]
