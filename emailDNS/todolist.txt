@@ -1,10 +1,10 @@
 还有如下工作可以做：
 1. 现在只是通过bash命令："dig +short myip.opendns.com @resolver1.opendns.com"来获得本机的外部IP地址
 2. 在程序中支持多email帐号。暂时可以通过在crontab里面多设置几行
-   @reboot python /your_path_to_notifyIP/notifyIP.py YouEmailAddress YouPasswordForYourEmailAccount YouSMTPServer YouSMTPPort &
+   @reboot python /your_path_to_notifyIP/notifyIP.py YouEmailAddress YouPasswordForYourEmailAccount &
    来达到同样的目的，只要传递进去的帐号参数不同即可。
    if you install it through "sudo pip install emailDNS"""your_path_to_notifyIP" should be "/usr/local/lib/python2.7/dist-packages/emailDNS/notifyIP.py"
-3. 现在只测试了mail.163.com的SMTP服务，对于比如gmail, yahoo, sohu的SMTP并没有进行测试，应该问题不大，但是需要在code中实现测试。
+3. 现在只测试了mail.163.com, outlook.com的SMTP服务，对于比如gmail, yahoo, sohu的SMTP并没有进行测试，应该问题不大，但是需要在code中实现测试。
 
 2020.01.05
 

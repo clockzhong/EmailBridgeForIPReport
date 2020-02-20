@@ -25,7 +25,7 @@
    d. email帐号对应的的SMTP的服务端口，多数情况下都是25
 
 2. 执行如下命令：
-   notifyIP.py YouEmailAddress YouPasswordForYourEmailAccount YouSMTPServer YouSMTPPort
+   notifyIP.py YouEmailAddress YouPasswordForYourEmailAccount 
 
 如果需要在服务器设备上每次启动时都自动运行notifyIP.py，则可以参考stackoverflow站点上这个session的第二个方案。
 
@@ -37,7 +37,7 @@ https://stackoverflow.com/questions/24518522/run-python-script-at-startup-in-ubu
 
 2. 在最后，增加一行如下命令：
 
-   @reboot python /your_path_to_notifyIP/notifyIP.py YouEmailAddress YouPasswordForYourEmailAccount YouSMTPServer YouSMTPPort &
+   @reboot python /your_path_to_notifyIP/notifyIP.py YouEmailAddress YouPasswordForYourEmailAccount &
 
 上述步骤在Ubuntu16.04 LTS环境中验证工作正常。
 
