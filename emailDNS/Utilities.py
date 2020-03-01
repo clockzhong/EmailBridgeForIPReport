@@ -155,6 +155,31 @@ def sendEmail(emailAddr, password, mesgContent, extraComment=""):
     s.sendmail(me, [you], msg.as_string())
     s.quit()
 
+def sendEmail2(senderEmailAddr, receiverEmail, password, mesgContent, extraComment=""):
+    partsArr=senderEmailAddr.split("@")
+    #print(partsArr)
+    account = partsArr[0]
+    domainName=partsArr[1]
+    smtpServer, smtpPort = getSMTPInfo(domainName)
+    #print smtpServer, smtpPort
+    #return
+    you = emailAddr
+    me = emailAddr
+    msg = MIMEText(mesgContent)
+    msg['Subject'] = "Your IP Address"+" "+ extraComment
+    msg['From'] = me
+    msg['To'] = you
+    print "connect the smtpServer!"
+
+    s = smtplib.SMTP(smtpServer, smtpPort, timeout=15)
+    if smtpServer==SMTPServer_outlook_com:
+        s.starttls()
+    print(me, password)
+    s.login(me, password)
+    print "sending email!"
+    s.sendmail(me, [you], msg.as_string())
+    s.quit()
+
 def notifyIP(emailAddr, password, extraComment=""):
     global CurrentIP
     global CurrentLocalIPs
