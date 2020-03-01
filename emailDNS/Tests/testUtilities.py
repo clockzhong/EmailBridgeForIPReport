@@ -58,6 +58,13 @@ class testUtilities(unittest.TestCase):
         Utilities.notifyIP(emailAddr, password)
         #you should only get one email, because you IP is not changed
 
+
+    def ttestNotifyIP2(self):
+        emailAddr = "youEmail"
+        password  = "youPassword"
+
+        Utilities.notifyIP2(emailAddr, password)
+
     def testGetIFList(self):
         myList = Utilities.getIFList()
         print myList

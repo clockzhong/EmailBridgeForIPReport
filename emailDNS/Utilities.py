@@ -204,3 +204,28 @@ def notifyIP(emailAddr, password, extraComment=""):
         CurrentLocalIPs = newLocalIPs
     else:
         print "CurrentIP and CurrentLocalIPs not changed"
+
+def notifyIP2(senderEmailAddr, receiverEmailAddr, password, extraComment=""):
+    global CurrentIP
+    global CurrentLocalIPs
+    #newIP = getIPFromIP138()
+    newIP = getIPFromDIG()
+    newLocalIPs = getIFList()
+    print newIP, CurrentIP, newLocalIPs, CurrentLocalIPs
+    if newIP != CurrentIP or newLocalIPs!=CurrentLocalIPs:
+        messageContent = "extra IP:"+newIP+"\n"
+        messageContent+= "local IPs:\n"+newLocalIPs
+        print newIP, "!!!!!!!!!!!!!!!!!!!!!!!!"
+        if newIP!="10.0.0.1":
+            while True:
+                try:
+                    sendEmail2(senderEmailAddr, receiverEmailAddr, password, messageContent, extraComment)
+                    break
+                except Exception as e:
+                    print "try again because getting errors:", e
+
+
+        CurrentIP = newIP
+        CurrentLocalIPs = newLocalIPs
+    else:
+        print "CurrentIP and CurrentLocalIPs not changed"
