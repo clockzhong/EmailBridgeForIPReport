@@ -46,9 +46,6 @@ class testUtilities(unittest.TestCase):
         password  = "myEmailPassword"
         mesgContent = "test Content"
 
-        senderEmailAddr = "myEmail"
-        receiverEmailAddr="youEmail"
-
         Utilities.sendEmail2(senderEmailAddr, receiverEmailAddr, password, mesgContent)
 
     def ttestNotifyIP(self):
