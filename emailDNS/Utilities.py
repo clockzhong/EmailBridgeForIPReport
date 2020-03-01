@@ -155,7 +155,7 @@ def sendEmail(emailAddr, password, mesgContent, extraComment=""):
     s.sendmail(me, [you], msg.as_string())
     s.quit()
 
-def sendEmail2(senderEmailAddr, receiverEmail, password, mesgContent, extraComment=""):
+def sendEmail2(senderEmailAddr, receiverEmailAddr, password, mesgContent, extraComment=""):
     partsArr=senderEmailAddr.split("@")
     #print(partsArr)
     account = partsArr[0]
@@ -163,8 +163,8 @@ def sendEmail2(senderEmailAddr, receiverEmail, password, mesgContent, extraComme
     smtpServer, smtpPort = getSMTPInfo(domainName)
     #print smtpServer, smtpPort
     #return
-    you = emailAddr
-    me = emailAddr
+    you = receiverEmailAddr
+    me = senderEmailAddr
     msg = MIMEText(mesgContent)
     msg['Subject'] = "Your IP Address"+" "+ extraComment
     msg['From'] = me
