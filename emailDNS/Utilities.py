@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 from email.mime.text import MIMEText
 import smtplib
 import time
@@ -71,14 +71,14 @@ IPReportWebList=['http://www.infosniper.net/', 'http://2000019.ip138.com/','http
 
 
 def getURL(url):
-    opener = urllib2.build_opener()
+    opener = urllib.request.build_opener()
     opener.addheaders = [('User-Agent', AgentList[1])]
     text = ""
     try:
         openerConnection = opener.open(url, timeout=HTTP_TIMEOUT)
         text = openerConnection.read()
     except Exception as e:
-        print e
+        print(e)
         return ""
     return text
 
@@ -93,7 +93,7 @@ def getIPFromIP138():
                     #print "got IP:", htmlCont
                     break
             except Exception as e:
-                print "try again because getting errors:", e
+                print("try again because getting errors:", e)
         startChar = '['
         endChar   = ']'
         startIndex = htmlCont.index(startChar)+len(startChar)
@@ -103,7 +103,7 @@ def getIPFromIP138():
         if len(ipStr)!=0:
             return ipStr
         else:
-            print "try again because geting wrong IP", ipStr
+            print("try again because geting wrong IP", ipStr)
 
 def getIPFromDIG():
     """Use "dig +short myip.opendns.com @resolver1.opendns.com" to get the public address """
@@ -144,14 +144,14 @@ def sendEmail(emailAddr, password, mesgContent, extraComment=""):
     msg['Subject'] = "Your IP Address"+" "+ extraComment
     msg['From'] = me
     msg['To'] = you
-    print "connect the smtpServer!"
+    print("connect the smtpServer!")
 
     s = smtplib.SMTP(smtpServer, smtpPort, timeout=15)
     if smtpServer==SMTPServer_outlook_com:
         s.starttls()
-    print(me, password)
+    print((me, password))
     s.login(me, password)
-    print "sending email!"
+    print("sending email!")
     s.sendmail(me, [you], msg.as_string())
     s.quit()
 
@@ -169,14 +169,14 @@ def sendEmail2(senderEmailAddr, receiverEmailAddr, password, mesgContent, extraC
     msg['Subject'] = "Your IP Address"+" "+ extraComment
     msg['From'] = me
     msg['To'] = you
-    print "connect the smtpServer!"
+    print("connect the smtpServer!")
 
     s = smtplib.SMTP(smtpServer, smtpPort, timeout=15)
     if smtpServer==SMTPServer_outlook_com:
         s.starttls()
-    print(me, password)
+    print((me, password))
     s.login(me, password)
-    print "sending email!"
+    print("sending email!")
     s.sendmail(me, [you], msg.as_string())
     s.quit()
 
@@ -186,24 +186,24 @@ def notifyIP(emailAddr, password, extraComment=""):
     #newIP = getIPFromIP138()
     newIP = getIPFromDIG()
     newLocalIPs = getIFList()
-    print newIP, CurrentIP, newLocalIPs, CurrentLocalIPs
+    print(newIP, CurrentIP, newLocalIPs, CurrentLocalIPs)
     if newIP != CurrentIP or newLocalIPs!=CurrentLocalIPs:
         messageContent = "extra IP:"+newIP+"\n"
         messageContent+= "local IPs:\n"+newLocalIPs
-        print newIP, "!!!!!!!!!!!!!!!!!!!!!!!!"
+        print(newIP, "!!!!!!!!!!!!!!!!!!!!!!!!")
         if newIP!="10.0.0.1":
             while True:
                 try:
                     sendEmail(emailAddr, password, messageContent, extraComment)
                     break
                 except Exception as e:
-                    print "try again because getting errors:", e
+                    print("try again because getting errors:", e)
 
 
         CurrentIP = newIP
         CurrentLocalIPs = newLocalIPs
     else:
-        print "CurrentIP and CurrentLocalIPs not changed"
+        print("CurrentIP and CurrentLocalIPs not changed")
 
 def notifyIP2(senderEmailAddr, receiverEmailAddr, password, extraComment=""):
     global CurrentIP
@@ -211,21 +211,21 @@ def notifyIP2(senderEmailAddr, receiverEmailAddr, password, extraComment=""):
     #newIP = getIPFromIP138()
     newIP = getIPFromDIG()
     newLocalIPs = getIFList()
-    print newIP, CurrentIP, newLocalIPs, CurrentLocalIPs
+    print(newIP, CurrentIP, newLocalIPs, CurrentLocalIPs)
     if newIP != CurrentIP or newLocalIPs!=CurrentLocalIPs:
         messageContent = "extra IP:"+newIP+"\n"
         messageContent+= "local IPs:\n"+newLocalIPs
-        print newIP, "!!!!!!!!!!!!!!!!!!!!!!!!"
+        print(newIP, "!!!!!!!!!!!!!!!!!!!!!!!!")
         if newIP!="10.0.0.1":
             while True:
                 try:
                     sendEmail2(senderEmailAddr, receiverEmailAddr, password, messageContent, extraComment)
                     break
                 except Exception as e:
-                    print "try again because getting errors:", e
+                    print("try again because getting errors:", e)
 
 
         CurrentIP = newIP
         CurrentLocalIPs = newLocalIPs
     else:
-        print "CurrentIP and CurrentLocalIPs not changed"
+        print("CurrentIP and CurrentLocalIPs not changed")

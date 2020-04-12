@@ -26,11 +26,11 @@ class testUtilities(unittest.TestCase):
     def testGetIP(self):
         #print(dir(Utilities))
         ipAddr=Utilities.getIPFromIP138()
-        print "Your IP is:", ipAddr,type(ipAddr)
+        print("Your IP is:", ipAddr,type(ipAddr))
 
     def testGetIPFromDIG(self):
         ipAddr=Utilities.getIPFromDIG()
-        print "Your IP is:", ipAddr, type(ipAddr)
+        print("Your IP is:", ipAddr, type(ipAddr))
 
 
     def ttestSendEmail(self):
@@ -65,7 +65,7 @@ class testUtilities(unittest.TestCase):
 
     def testGetIFList(self):
         myList = Utilities.getIFList()
-        print myList
+        print(myList)
 
 
 
