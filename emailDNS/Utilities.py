@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 
 import urllib.request, urllib.error, urllib.parse
 from email.mime.text import MIMEText
@@ -17,13 +17,16 @@ def all_interfaces():
     max_possible = 128  # arbitrary. raise if needed.
     bytes = max_possible * 32
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    names = array.array('B', '\0' * bytes)
+    names = array.array('B', [0] * bytes)
     outbytes = struct.unpack('iL', fcntl.ioctl(
         s.fileno(),
         0x8912,  # SIOCGIFCONF
         struct.pack('iL', bytes, names.buffer_info()[0])
     ))[0]
+    s.close()
     namestr = names.tostring()
+    namestr = str(namestr)
+    #print(type(namestr))
     lst = []
     for i in range(0, outbytes, 40):
         name = namestr[i:i+16].split('\0', 1)[0]
@@ -67,7 +70,7 @@ AgentList=['Mozilla/5.0 (X11; U; Linux i686) Gecko/20071127 Firefox/2.0.0.11',
         "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0"]
 
 #it seems 'http://www.iplocation.net/' couldn't work
-IPReportWebList=['http://www.infosniper.net/', 'http://2000019.ip138.com/','http://www.iplocation.net/']
+IPReportWebList=['http://www.infosniper.net/', 'http://2020.ip138.com/','http://www.iplocation.net/']
 
 
 def getURL(url):
