@@ -1,4 +1,4 @@
-#! /usr/bin/env python3
+#! /usr/bin/env python
 import os
 import sys
 sys.path.insert(0, '..')
@@ -9,31 +9,28 @@ class testUtilities(unittest.TestCase):
     def testGetURL(self):
         url = "http://www.baidu.com"
         htmlCont=Utilities.getURL(url)
-        #return
         #print htmlCont
         #Baidu's webpage content should be bigger than 100 bytes
         self.assertGreater(len(htmlCont), 100)
 
-        #url = Utilities.IPReportWebList[0]
-        #htmlCont = Utilities.getURL(url)
-        #self.assertGreater(len(htmlCont), 100)
+        url = Utilities.IPReportWebList[0]
+        htmlCont = Utilities.getURL(url)
+        self.assertGreater(len(htmlCont), 100)
         #print htmlCont
-        #return
 
         url = Utilities.IPReportWebList[1]
         htmlCont = Utilities.getURL(url)
         self.assertGreater(len(htmlCont), 100)
         #print htmlCont
 
-    #disable it
-    def ttestGetIP(self):
+    def testGetIP(self):
         #print(dir(Utilities))
         ipAddr=Utilities.getIPFromIP138()
-        print("Your IP is:", ipAddr,type(ipAddr))
+        print "Your IP is:", ipAddr,type(ipAddr)
 
     def testGetIPFromDIG(self):
         ipAddr=Utilities.getIPFromDIG()
-        print("Your IP is:", ipAddr, type(ipAddr))
+        print "Your IP is:", ipAddr, type(ipAddr)
 
 
     def ttestSendEmail(self):
@@ -68,7 +65,7 @@ class testUtilities(unittest.TestCase):
 
     def testGetIFList(self):
         myList = Utilities.getIFList()
-        print(myList)
+        print myList
 
 
 
